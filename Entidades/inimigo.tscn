@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://iyn1b6nwed6k"]
+
+[ext_resource type="Script" path="res://Entidades/inimigo.cs" id="1_jm7kw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ki3am"]
+albedo_color = Color(0.0352941, 0.368627, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2i35d"]
+material = SubResource("StandardMaterial3D_ki3am")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w68vh"]
+
+[node name="Inimigo" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_jm7kw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_2i35d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_w68vh")

@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://cnc6tmjpfxvwv"]
+
+[ext_resource type="Script" path="res://Entidades/jogador.cs" id="1_ke8ov"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0l01e"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m8cms"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpo8y"]
+albedo_color = Color(0.745772, 0, 0.0486611, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sexl4"]
+size = Vector3(0.817505, 0.813232, 0.809631)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tu8cy"]
+size = Vector3(0.811066, 0.789063, 0.803955)
+
+[sub_resource type="Animation" id="Animation_hd1qc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kpsjc"]
+resource_name = "morreu"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.1, 0.1, 0.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fptnh"]
+_data = {
+"RESET": SubResource("Animation_hd1qc"),
+"morreu": SubResource("Animation_kpsjc")
+}
+
+[node name="Jogador" type="CharacterBody3D"]
+script = ExtResource("1_ke8ov")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0l01e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_m8cms")
+surface_material_override/0 = SubResource("StandardMaterial3D_vpo8y")
+
+[node name="CollisorMoedas" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisorMoedas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.10352e-05, -0.00402832, -0.00430298)
+shape = SubResource("BoxShape3D_sexl4")
+
+[node name="CollisorInimigo" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisorInimigo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0030669, 0, -0.00012207)
+shape = SubResource("BoxShape3D_tu8cy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fptnh")
+}
+
+[connection signal="area_entered" from="CollisorMoedas" to="." method="_on_collisor_moedas_area_entered"]
+[connection signal="body_entered" from="CollisorInimigo" to="." method="_on_collisor_inimigo_body_entered"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://clh40608t1ifx"]
+
+[ext_resource type="Script" path="res://Fases/Fase/PrimeiraFase.cs" id="1_pib2h"]
+[ext_resource type="PackedScene" uid="uid://c41x8adsdaq64" path="res://Fases/Fase/SegundaFase.tscn" id="2_3l4hf"]
+[ext_resource type="PackedScene" uid="uid://cnc6tmjpfxvwv" path="res://Entidades/jogador.tscn" id="2_my448"]
+[ext_resource type="PackedScene" uid="uid://dcu6k5fodov68" path="res://Fases/Fase/FerramentasDeCriarMapa/AmbienteDoJogo.tscn" id="3_niwqe"]
+[ext_resource type="PackedScene" uid="uid://iyn1b6nwed6k" path="res://Entidades/inimigo.tscn" id="4_3ow52"]
+[ext_resource type="PackedScene" uid="uid://c4hgxp4w1fkxu" path="res://Fases/Fase/FerramentasDeCriarMapa/CriadorDeMapa.tscn" id="6_bcqqt"]
+
+[sub_resource type="Curve3D" id="Curve3D_00pcp"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.5, 0, 0, 0, 0, 0, 0, 0, 0, 9.5, 0, 0),
+"tilts": PackedFloat32Array(0, -1.02962)
+}
+point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wutvo"]
+size = Vector3(3.64697, 2.01422, 1.87012)
+
+[node name="PrimeiraFase" type="Node3D" node_paths=PackedStringArray("SpawnPlayer", "Player", "AreaVitoria", "Moedas")]
+script = ExtResource("1_pib2h")
+Titulo = "Essa e a primeira fase"
+Descricao = "Não é possível que você não consegue passar disso daqui :P"
+CorFundo = Color(0.760784, 0.768627, 1, 1)
+ProximaFase = ExtResource("2_3l4hf")
+SpawnPlayer = NodePath("Spawn")
+Player = NodePath("Jogador")
+AreaVitoria = NodePath("Area3D")
+Moedas = []
+
+[node name="Jogador" parent="." instance=ExtResource("2_my448")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.49233, 3, 3.47563)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.255142, 0.966904, 0, -0.966904, 0.255142, 4.36856, 11.639, 7.39367)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("3_niwqe")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819, -1, 13, 0)
+
+[node name="GridMap" parent="." instance=ExtResource("6_bcqqt")]
+data = {
+"cells": PackedInt32Array(7, 1, 3, 6, 1, 3, 5, 1, 3, 4, 1, 3, 3, 1, 3, 2, 1, 3, 1, 1, 3, 0, 1, 3, 65535, 1, 3, 65535, 2, 3, 65535, 3, 3, 65535, 4, 3, 65535, 5, 3, 65535, 0, 3, 65534, 0, 3, 65533, 0, 3, 65532, 0, 3, 65531, 0, 3, 65528, 1, 3, 65528, 2, 3, 65528, 3, 3, 65528, 4, 3, 65528, 5, 3, 65528, 6, 3, 65528, 7, 3, 65529, 7, 3, 65530, 7, 3, 65531, 7, 3, 65532, 7, 3, 65533, 7, 3, 65534, 7, 3, 65535, 7, 3, 0, 7, 3, 1, 7, 3, 1, 6, 3, 2, 6, 3, 3, 6, 3, 4, 6, 3, 5, 6, 3, 6, 6, 3, 7, 6, 3, 8, 6, 3, 9, 6, 3, 10, 6, 3, 10, 7, 3, 10, 8, 3, 11, 8, 3, 12, 8, 3, 13, 8, 3, 14, 8, 3, 14, 7, 3, 14, 6, 3, 14, 5, 3, 14, 4, 3, 14, 3, 3, 14, 2, 3, 14, 1, 3, 14, 0, 3, 14, 65535, 3, 13, 65535, 3, 12, 65535, 3, 11, 65535, 3, 10, 65535, 3, 9, 65535, 3, 9, 0, 3, 65529, 0, 3, 65530, 0, 3, 8, 1, 3, 9, 1, 3, 10, 5, 3, 10, 4, 3, 10, 3, 3, 11, 3, 3, 11, 2, 3, 65534, 1, 0, 65528, 0, 3, 65533, 1, 0, 65532, 1, 0, 65531, 1, 0, 65530, 1, 0, 65529, 1, 0, 65529, 2, 0, 65529, 3, 0, 65530, 3, 0, 65530, 4, 0, 65529, 4, 0, 65530, 5, 0, 65529, 5, 0, 65529, 6, 0, 65530, 6, 0, 65530, 2, 0, 65531, 2, 0, 65532, 2, 0, 65533, 2, 0, 65533, 3, 0, 65534, 2, 0, 65534, 3, 0, 65533, 4, 0, 65532, 4, 0, 65532, 3, 0, 65531, 3, 0, 65531, 4, 0, 65531, 5, 0, 65531, 6, 0, 65532, 6, 0, 65532, 5, 0, 65534, 4, 0, 65534, 5, 0, 65533, 5, 0, 65533, 6, 0, 65534, 6, 0, 65535, 6, 1, 0, 5, 1, 1, 4, 1, 2, 3, 1, 3, 2, 1, 4, 3, 1, 5, 4, 1, 6, 5, 1, 7, 4, 1, 8, 3, 1, 9, 2, 1, 9, 3, 2, 8, 4, 2, 7, 5, 2, 6, 4, 2, 5, 3, 2, 4, 2, 2, 2, 2, 2, 1, 3, 2, 0, 4, 2, 1, 5, 2, 2, 4, 2, 3, 3, 2, 4, 4, 2, 5, 5, 2, 3, 5, 2, 6, 2, 2, 7, 3, 2, 8, 2, 2, 7, 2, 1, 6, 3, 1, 5, 2, 1, 3, 4, 1, 4, 5, 1, 2, 5, 1, 9, 4, 1, 8, 5, 1, 0, 2, 2, 1, 2, 1, 0, 3, 1, 9, 5, 2, 10, 2, 0, 10, 1, 0, 11, 1, 0, 11, 0, 0, 12, 0, 0, 10, 0, 0, 12, 1, 0, 13, 0, 0, 13, 1, 0, 13, 2, 0, 12, 2, 0, 12, 3, 0, 13, 3, 0, 12, 4, 0, 13, 4, 0, 11, 4, 0, 11, 5, 0, 11, 6, 0, 11, 7, 0, 12, 7, 0, 13, 7, 0, 13, 6, 0, 13, 5, 0, 12, 5, 0, 12, 6, 0, 0, 6, 2)
+}
+
+[node name="Inimigo" parent="." node_paths=PackedStringArray("Caminho") instance=ExtResource("4_3ow52")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54091, 1.35816, 3.5265)
+Caminho = NodePath("../Path3D")
+
+[node name="Inimigo2" parent="." node_paths=PackedStringArray("Caminho") instance=ExtResource("4_3ow52")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54091, 1.35816, 2.38887)
+Caminho = NodePath("../Path3D2")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.598278, 1.45375, 4.49129)
+curve = SubResource("Curve3D_00pcp")
+
+[node name="Path3D2" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.598278, 1.45375, 2.5446)
+curve = SubResource("Curve3D_00pcp")
+
+[node name="Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33908, 2.21398, 3.74912)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0859, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2567, 2.03024, 1.01543)
+shape = SubResource("BoxShape3D_wutvo")

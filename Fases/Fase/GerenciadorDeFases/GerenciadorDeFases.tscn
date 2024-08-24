@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxbeys0semkbo"]
+
+[ext_resource type="Script" path="res://Fases/Fase/GerenciadorDeFases/GerenciadorDeFases.cs" id="1_5o320"]
+[ext_resource type="PackedScene" uid="uid://clh40608t1ifx" path="res://Fases/Fase/PrimeiraFase.tscn" id="2_k4eib"]
+[ext_resource type="PackedScene" uid="uid://3dkt66d02w4t" path="res://Fases/TelaDescritiva/TelaDescritiva.tscn" id="3_bav7y"]
+[ext_resource type="PackedScene" uid="uid://gtgqedhy3ihx" path="res://Fases/TelaFinal/TelaFinal.tscn" id="4_bfxlo"]
+
+[node name="GerenciadorDeFases" type="Node" node_paths=PackedStringArray("telaDescritiva", "telaFinal")]
+script = ExtResource("1_5o320")
+primeiraFase = ExtResource("2_k4eib")
+telaDescritiva = NodePath("TelaDescritiva")
+telaFinal = NodePath("TelaFinal")
+
+[node name="TelaDescritiva" parent="." instance=ExtResource("3_bav7y")]
+visible = false
+
+[node name="TelaFinal" parent="." instance=ExtResource("4_bfxlo")]
+visible = false

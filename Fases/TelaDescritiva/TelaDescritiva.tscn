@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://3dkt66d02w4t"]
+
+[ext_resource type="PackedScene" uid="uid://dyyf2fixoq0s2" path="res://Menu/Botao.tscn" id="1_08dvy"]
+[ext_resource type="Script" path="res://Fases/TelaDescritiva/TelaDescritiva.cs" id="1_r1ere"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ymhtm"]
+font_size = 36
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_33lld"]
+font_size = 24
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TelaDescritiva" type="Control" node_paths=PackedStringArray("tituloLabel", "DescricaoLabel", "Background")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r1ere")
+BackgroundColor = Color(0.760784, 0.768627, 1, 1)
+tituloLabel = NodePath("Margin/Texto/Titulo")
+DescricaoLabel = NodePath("Margin/Texto/Descricao")
+Background = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.760784, 0.768627, 1, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Texto" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Titulo" type="Label" parent="Margin/Texto"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Bem vindo ao sofrimento :D"
+label_settings = SubResource("LabelSettings_ymhtm")
+horizontal_alignment = 1
+
+[node name="Descricao" type="Label" parent="Margin/Texto"]
+layout_mode = 2
+text = "Essa é a primeira fase, eh para ser simples mesmo, mas se você morrer e porque é ruim :("
+label_settings = SubResource("LabelSettings_33lld")
+
+[node name="Continuar" parent="Margin" instance=ExtResource("1_08dvy")]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Continuar"
+
+[connection signal="pressed" from="Margin/Continuar" to="." method="_on_continuar_pressed"]
